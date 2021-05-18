@@ -24,13 +24,13 @@ pipeline
         stage("Build docker")
         {
             steps{
-                sh "docker build -f Dockerfile -t  ProjetKubeJenkins ."
+                sh "docker build -f Dockerfile -t  projetkubejenkins ."
             }
         }
 		stage("deployment kubernetes")
         {
             steps{
-                sh "kubectl create deployment ProjetKubeJenkins --image=ProjetKubeJenkins --port=8080"
+                sh "kubectl create deployment projetkubejenkins --image=projetkubejenkins --port=8080"
             }
         }
               
