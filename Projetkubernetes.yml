@@ -1,0 +1,32 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+ labels:
+  name: projetkubernetes
+spec:
+ replicas: 1
+ template:
+   metadata:
+    labels:
+     name: projetkubernetes
+   spec:
+     containers:
+     - image: projetkubernetesjenkins
+       name: projetkubernetes
+       ports:
+       - name: projetkubernetes
+         containerPort: 8080
+# Node Port Service
+kind: Service
+apiVersion: v1
+metadata:
+ labels:
+  name: projetkubernetes
+ name: projetkubernetes
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    name: projetkubernetes
