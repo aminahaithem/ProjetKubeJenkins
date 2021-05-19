@@ -15,7 +15,7 @@ spec:
        name: projetkubernetes
        ports:
        - name: projetkubernetes
-         containerPort: 8989
+         containerPort: 9001
 # Node Port Service
 kind: Service
 apiVersion: v1
@@ -26,7 +26,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8989
-      targetPort: 8989
+    - port: 9001
+      targetPort: 9001
   selector:
     name: projetkubernetes
