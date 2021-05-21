@@ -26,14 +26,7 @@ pipeline
             steps{
                 sh "docker build -f Dockerfile -t  projetkubejenkins ."
             }
-        }
-		stage("deployment kubernetes")
-        {
-            steps{
-                sh "kubectl apply -f ./Projetkubernetes.yml"
-            }
-        }
-              
+        }		            
     }
    
 }
