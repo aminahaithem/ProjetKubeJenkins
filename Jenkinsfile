@@ -31,7 +31,7 @@ pipeline
 		    withCredentials([string(credentialsId: 'Projet-kube', variable: 'projetkubernetespwd')]) {
 			 
 			  sh "docker login -u bennanihaythem -p ${projetkubernetespwd}"
-              sh "pocker push bennanihaythem/projetkubejenkins:${DOCKER_TAG}"
+              sh "docker push bennanihaythem/projetkubejenkins:${DOCKER_TAG}"
                }
 		    
 		   }
