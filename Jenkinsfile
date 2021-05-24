@@ -1,14 +1,11 @@
 pipeline
 {
     agent any
+	environment {
+	    DOCKER_TAG = getDockerTag()
+	}
     stages {
-        stage("Git")
-        {
-            steps{
-              git "https://github.com/aminahaithem/ProjetKubeJenkins.git"
-            }
-           
-        }
+        
         stage("compile")
         {
             steps{
@@ -24,9 +21,15 @@ pipeline
         stage("Build docker")
         {
             steps{
-                sh "docker build -f Dockerfile -t  projetkubejenkins ."
+                sh "docker build -t  bennanihaythem/projetkubejenkins:${DOCKER_TAG}"
+				
             }
         }		            
     }
    
+    def getDockerTag()
+	{
+	   def tag = sh script:"git rev-parse HEAD" , returnStdout: true
+	   return tag
+	}
 }
