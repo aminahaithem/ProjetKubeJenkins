@@ -21,7 +21,7 @@ pipeline
         stage("Build docker")
         {
             steps{
-                sh "docker build -t  bennanihaythem/projetkubejenkins:${DOCKER_TAG} ."
+                sh "docker build . -t  bennanihaythem/projetkubejenkins:${DOCKER_TAG}"
 				
             }
         }		            
