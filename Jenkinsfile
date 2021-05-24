@@ -24,7 +24,19 @@ pipeline
                 sh "docker build . -t  bennanihaythem/projetkubejenkins:${DOCKER_TAG}"
 				
             }
-        }		            
+        }
+       stage("Docker Hub push")
+       { 
+	       steps{
+		    withCredentials([string(credentialsId: 'Projet-kube', variable: 'projetkubernetespwd')]) {
+			 
+			  sh "docker login -u bennanihaythem -p ${projetkubernetespwd}"
+              sh "pocker push bennanihaythem/projetkubejenkins:${DOCKER_TAG}"
+               }
+		    
+		   }
+	   
+	   }	   
     }
 }
    
