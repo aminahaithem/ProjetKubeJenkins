@@ -1,15 +1,27 @@
 pipeline
 {
     agent any
-	environment {
-	    DOCKER_TAG = getDockerTag()
-	}
+	
     stages {
+
+        stage("Git")
+        {
+            steps{
+              git "https://github.com/aminahaithem/ProjetKubeJenkins.git"
+            }
+           
+        }
         
         stage("compile")
         {
             steps{
                 sh "mvn clean compile"
+            }
+        }
+        stage("test")
+        {
+            steps{
+                sh "mvn clean test"
             }
         }
         stage("install")
@@ -21,25 +33,18 @@ pipeline
         stage("Build docker")
         {
             steps{
-                sh "docker build . -t  bennanihaythem/projetkubejenkins:${DOCKER_TAG}"
+                sh "docker build -f Dockerfile -t projetkubejenkins ."
 				
             }
         }
        stage("Docker Hub push")
        { 
 	       steps{
-		    withCredentials([string(credentialsId: 'Projet-kube', variable: 'projetkubernetespwd')]) {
-			  sh "docker login -u bennanihaythem -p ${projetkubernetespwd}"
-              sh "docker push bennanihaythem/projetkubejenkins:${DOCKER_TAG}"
+		sh "kubectl apply -f Projetkubernetes.yml"  
                }
-		    
-		   }
+         }
 	   
 	   }	   
     }
 }
    
-    def getDockerTag(){
-	   def tag = sh script:"git rev-parse HEAD" , returnStdout: true
-	   return tag
-	}
