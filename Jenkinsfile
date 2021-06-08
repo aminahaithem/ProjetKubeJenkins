@@ -34,17 +34,14 @@ pipeline
         {
             steps{
                 sh "docker build -f Dockerfile -t projetkubejenkins ."
-				
             }
         }
        stage("Docker Hub push")
        { 
 	       steps{
-		sh "kubectl apply -f Projetkubernetes.yml"  
-               }
-         }
-	   
-	   }	   
+		        sh "kubectl apply -f Projetkubernetes.yml"  
+            }
+         }  	  
     }
 }
    
