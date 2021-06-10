@@ -33,13 +33,13 @@ pipeline
         stage("Build docker")
         {
             steps{
-                sh "docker build -f Dockerfile -t projetkubejenkins ."
+                sh "docker build -t projetkubejenkins ."
             }
         }
-       stage("Docker Hub push")
+       stage("kubernetes run image")
        { 
 	       steps{
-		        sh "kubectl apply -f Projetkubernetes.yml"  
+		        sh "kubectl run projetkubejenkins -- image=projetkubejenkins --port=9001"  
             }
          }  	  
     }
