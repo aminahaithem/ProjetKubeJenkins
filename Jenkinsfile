@@ -39,7 +39,7 @@ pipeline
        stage("kubernetes run image")
        { 
 	       steps{
-		        sh "kubectl run projetkubejenkins --image=projetkubejenkins --port=9001"  
+		        sh "kubectl run projetkubejenkins --image=projetkubejenkins"  
             }
          }  	  
     }
